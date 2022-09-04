@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<p><strong>Title:</strong>&nbsp;<%= @article.title %></p>
+<p><strong>Description:</strong>&nbsp;<%= @article.description %></p>
+
+<div>
+
+  <%= button_to "Destroy this article", @article, method: :delete %><br />
+  
+  <%= link_to "Back to articles", articles_path %>
+</div>
