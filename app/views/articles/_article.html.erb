@@ -1,14 +1,23 @@
 <div id="<%= dom_id article %>">
-  <p>
-    <strong>Title:</strong>
-    <%= article.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= article.description %>
-  </p>
-  
-  <%= button_to 'Delete', article, method: :delete %><br />
-  <%= link_to 'Update', edit_article_path(article) %>
+  <h1>By: <%= article.user.username if article.user %></h1>
+  <table>
+    <thead>
+      <tr>
+        <td><strong>Title</strong></td>
+        <td> <strong>Description</strong></td>
+        <td colspan="3">Actions</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.description %></td>
+        <td>
+          <%= button_to 'Delete', article, method: :delete %>
+          <%= link_to 'Update', edit_article_path(article) %><br />
+          <%= link_to "Show this article", article %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

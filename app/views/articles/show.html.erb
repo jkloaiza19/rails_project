@@ -1,5 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
+<h1>By: <%= @article.user.username if @article.user %></h1>
 <p><strong>Title:</strong>&nbsp;<%= @article.title %></p>
 <p><strong>Description:</strong>&nbsp;<%= @article.description %></p>
 

@@ -5,4 +5,6 @@ class Article < ApplicationRecord
     scope :recent, -> { order(created_at: :desc) }
     scope :author, -> (author) { where('author == ?', author) }
     scope :category, -> (cat) { where('category == ?', cat) }
+    
+     belongs_to :user
 end
