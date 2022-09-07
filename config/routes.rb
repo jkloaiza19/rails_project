@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   root 'pages#home'
   get '/about', to: 'pages#about'
-  
+  get '/signup', to: 'users#new'
+  resources :users, except: [:new]
   # namespace :api, constraints: { format: :json } do
   #   resources :articles_api
   # end
