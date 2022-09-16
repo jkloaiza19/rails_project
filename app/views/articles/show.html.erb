@@ -1,12 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>By: <%= @article.user.username if @article.user %></h1>
+<h1>Published by: <%= @article.user.username if @article.user %></h1>
 <p><strong>Title:</strong>&nbsp;<%= @article.title %></p>
 <p><strong>Description:</strong>&nbsp;<%= @article.description %></p>
 
 <div>
-
-  <%= button_to "Destroy this article", @article, method: :delete %><br />
+  <% if @article.user.id == current_user.id %>
+    <%= button_to "Destroy this article", @article, method: :delete %><br />
+  <% end %>
   
   <%= link_to "Back to articles", articles_path %>
 </div>

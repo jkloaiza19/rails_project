@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%= @user.username %>'s articles</h1>
+<p><strong>Email:</strong>&nbsp;<%= @user.email %></p>
+<p><strong>Articles published:</strong>&nbsp;<%= @user.articles.count %></p>
+<% if @user.id == current_user.id %>
+    <p><%= link_to "Edit User", edit_user_path(@user) %></p>
+    <p><%= button_to "Delete User", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }  %></p>
+<% end %>
+<p><< <%= link_to "Back to users", users_path %></p>
+<hr />
+<% if @user.articles.count > 0 %>
+   <% @user.articles.map do |article| %>
+       <p><strong>Title:</strong> <%= article.title %></p>
+       <p><strong>Desciption:</strong> <%= article.description %></p>
+       <p><strong>Published on:</strong> <%= article.created_at.strftime('%m/%d/%Y') %></p>
+        <%= link_to 'Go to article', article %>
+       <hr />
+    <% end %>   
+<% end %>

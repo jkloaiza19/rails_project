@@ -1,0 +1,13 @@
+  <div class="flickr_pagination">
+    <%= will_paginate @users if @users.count > 0 %>
+  </div>
+<% @users.map do |user| %>
+    <p><strong>User name:</strong> <%= user.username %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Password:</strong> <span>************</span></p>
+    <%= link_to "View user", user %>
+    <hr />
+<% end %>
+  <div class="flickr_pagination">
+    <%= will_paginate @users if @users.count > 0 %>
+  </div>

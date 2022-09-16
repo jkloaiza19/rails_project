@@ -1,11 +1,13 @@
 class ArticlesController < ApplicationController
+    before_action :verify_user_signed_in
     before_action :set_article , only: [:show, :edit, :update, :destroy]
+    before_action :require_same_user, only: [:update, :destroy]
     
     def index
         if (article_params[:author])
-            @articles = Article.author(article_params[:author])
+            @articles = Article.author(article_params[:author]).paginate(page: params[:page], per_page: 3)
         else
-            @articles = Article.recent
+            @articles = Article.recent.paginate(page: params[:page], per_page: 3)
         end
         
         # render json: { data: articles, status: :ok }
@@ -20,6 +22,7 @@ class ArticlesController < ApplicationController
     
     def create
         @article = Article.new(new_article_params)
+        @article.user = current_user
         if @article.save
             flash[:notice] = "Article created successfully"    
             redirect_to @article
@@ -59,5 +62,12 @@ class ArticlesController < ApplicationController
     
     def set_article
         @article = Article.find_by_id(article_params[:id])
+    end
+    
+    def require_same_user
+        if @article.user && @article.user.id != current_user.id && !@user.admin
+            flash[:alert] = "You can only edit or delete your own articles"
+            redirect_to @article
+        end
     end
 end
